@@ -7,12 +7,8 @@ public class Starter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instantinator.CreateCanvas("New canvas", transform);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

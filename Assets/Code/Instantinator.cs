@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
     public class Instantinator : MonoBehaviour
@@ -18,4 +19,22 @@ using UnityEngine.UI;
         return newImage;
     }
 
+
+    public static RectTransform CreateCanvas(string name, Transform parent)
+    {
+        Canvas canvas = Instantiate(new GameObject(name), parent).AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = Camera.main;
+        canvas.gameObject.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        canvas.gameObject.AddComponent<GraphicRaycaster>();
+        if(GameObject.FindGameObjectsWithTag("EventSystem").Length == 0)
+        {
+            GameObject eventSystem = Instantiate(new GameObject("EventSystem"), parent);
+            eventSystem.tag = "EventSystem";
+            eventSystem.AddComponent<EventSystem>();
+            eventSystem.AddComponent<StandaloneInputModule>();
+        }
+
+        return canvas.GetComponent<RectTransform>();
+    }
 }
