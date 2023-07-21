@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    private const float Speed = 1f;
+    private const float Speed = 1.5f;
     private const float AdditionValue = 1.5f;
     private Rigidbody2D rb;
     private BoxCollider2D collider;

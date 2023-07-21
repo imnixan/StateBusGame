@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class EnemySpawner : AbstractManager
 {
+    private const int MinEnemiesCount = 2;
+
     [SerializeField]
     private Enemy[] enemyPrefabs;
+
     private WaitForSeconds waitForSeconds;
     private Transform spawnerTransform;
     private Vector2 minBorders,
@@ -38,7 +41,7 @@ public class EnemySpawner : AbstractManager
     {
         while (true)
         {
-            if (transform.childCount < 1)
+            if (transform.childCount < MinEnemiesCount)
             {
                 SpawnRandomEnemy();
             }
@@ -61,7 +64,7 @@ public class EnemySpawner : AbstractManager
     {
         float side = Random.Range(0, 2) > 0 ? 1 : -1;
         Vector2 spawnPosition;
-        spawnPosition.y = Random.Range(maxBorders.y, maxBorders.y / 2 - 1);
+        spawnPosition.y = Random.Range(maxBorders.y, maxBorders.y / 2 - 2);
         spawnPosition.x = (maxBorders.x + 2) * side;
         return spawnPosition;
     }
