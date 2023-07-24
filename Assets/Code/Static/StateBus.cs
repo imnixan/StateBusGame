@@ -21,10 +21,12 @@ public static class StateBus
     public static StateQueue<int> CurrentScoresChanged;
     public static Vector2 CrosshairPosition;
     public static bool CanShoot;
+    public static bool newRecordReached;
     public static StateQueue<StateMachine.GameStates> GameStateChanged;
     public static StateQueue<bool> PlayerShot;
     public static StateQueue<Vector3> Explosion;
     public static StateQueue<bool> EnemyKilled;
+    public static StateQueue<bool> SettingsChanged;
 
     #endregion
 

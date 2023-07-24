@@ -8,6 +8,12 @@ public class GameManager : AbstractManager
     private int CurrentScores;
     private Rocket rocket;
 
+    private void Awake()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Application.targetFrameRate = 120;
+    }
+
     private void Start()
     {
         rocket = GetComponentInChildren<Rocket>();
@@ -15,6 +21,7 @@ public class GameManager : AbstractManager
 
     public override void OnGameStarted()
     {
+        StateBus.newRecordReached = false;
         CurrentScores = 0;
         inGame = true;
         inGameEnd = false;
@@ -36,10 +43,10 @@ public class GameManager : AbstractManager
 
     private void CheckRecord()
     {
-        int finalScore = StateBus.CurrentScoresChanged;
-        if (finalScore > PlayerPrefs.GetInt("Record"))
+        if (CurrentScores > PlayerPrefs.GetInt("Record"))
         {
-            PlayerPrefs.SetInt("Record", finalScore);
+            PlayerPrefs.SetInt("Record", CurrentScores);
+            StateBus.newRecordReached = true;
         }
     }
 

@@ -4,7 +4,10 @@ using TMPro;
 
 public class TimeManager : AbstractManager
 {
-    private const int MaxTime = 60;
+    [SerializeReference]
+    private AudioManager audioManager;
+
+    private const int MaxTime = 20;
     private TextMeshProUGUI timeCounter;
     private WaitForSecondsRealtime waitForSeconds;
 
@@ -29,6 +32,10 @@ public class TimeManager : AbstractManager
         for (int secondsLeft = MaxTime; secondsLeft >= 0; secondsLeft--)
         {
             timeCounter.text = secondsLeft.ToString();
+            if (secondsLeft == (int)audioManager.GetTimerEndLenght())
+            {
+                audioManager.StartEndTimerSound();
+            }
             yield return waitForSeconds;
         }
         StateBus.GameStateChanged += StateMachine.GameStates.GameEnd;

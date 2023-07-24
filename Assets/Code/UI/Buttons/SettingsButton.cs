@@ -15,7 +15,7 @@ public class SettingsButton : UIButton
     private string PlayerPrefsString;
     private Image buttonImage,
         buttonFace;
-    private string currentStatus;
+    private int currentStatus;
 
     protected override void Start()
     {
@@ -29,7 +29,7 @@ public class SettingsButton : UIButton
         buttonImage = GetComponent<Image>();
         buttonFace = transform.GetChild(0).GetComponent<Image>();
         InitialPrefString();
-        currentStatus = PlayerPrefs.GetString(
+        currentStatus = PlayerPrefs.GetInt(
             PlayerPrefsString,
             StaticConstants.TurnedOnSettingsValue
         );
@@ -68,9 +68,10 @@ public class SettingsButton : UIButton
         currentStatus = TurnedOn()
             ? StaticConstants.TurnedOffSettingsVaule
             : StaticConstants.TurnedOnSettingsValue;
-        PlayerPrefs.SetString(PlayerPrefsString, currentStatus);
+        PlayerPrefs.SetInt(PlayerPrefsString, currentStatus);
         PlayerPrefs.Save();
         SetColors();
+        StateBus.SettingsChanged += true;
     }
 
     private bool TurnedOn()

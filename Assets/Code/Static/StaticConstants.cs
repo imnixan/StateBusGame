@@ -1,16 +1,16 @@
 ﻿public static class StaticConstants
 {
-    private static string _turnedOnSettingsVaule = "ON";
-    private static string _turnedOffSettingsVaule = "OFF";
+    private static int _turnedOnSettingsVaule = 1;
+    private static int _turnedOffSettingsVaule = 0;
     private static string _vibroSettingsPrefs = "VIBRO";
     private static string _soundSettingsPrefs = "SOUND";
 
-    public static string TurnedOnSettingsValue
+    public static int TurnedOnSettingsValue
     {
         get { return _turnedOnSettingsVaule; }
     }
 
-    public static string TurnedOffSettingsVaule
+    public static int TurnedOffSettingsVaule
     {
         get { return _turnedOffSettingsVaule; }
     }
