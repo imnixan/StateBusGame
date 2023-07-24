@@ -13,6 +13,7 @@ public abstract class AbstractManager : MonoBehaviour
     {
         if (StateBus.GameStateChanged)
         {
+            Debug.Log($"{this} gameStateChanged");
             StateBus.StateWorkers[StateBus.GameStateChanged].MakeStaff(this);
         }
     }

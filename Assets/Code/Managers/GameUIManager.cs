@@ -12,9 +12,4 @@ public class GameUIManager : AbstractUiManager
     {
         HideButtons();
     }
-
-    public override void OnGameEnded()
-    {
-        HideButtons();
-    }
 }

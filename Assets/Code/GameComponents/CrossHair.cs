@@ -8,7 +8,8 @@ public class CrossHair : MonoBehaviour
     private Color red,
         gray;
 
-    private const float MinYPos = -3;
+    private const float MinYPos = -2;
+    private const float CrosshairSpeed = 1;
 
     private Transform crosshairTransform;
     private Camera camera;
@@ -59,13 +60,21 @@ public class CrossHair : MonoBehaviour
         if (FingerHold)
         {
             fingerPosition = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
-            if (fingerPosition.y > MinYPos)
-            {
-                crosshairTransform.position = fingerPosition;
-                StateBus.CrosshairPosition = crosshairTransform.position;
-            }
         }
         UpdateCrosshairColor();
+    }
+
+    private void FixedUpdate()
+    {
+        if (fingerPosition.y > MinYPos)
+        {
+            crosshairTransform.position = Vector2.MoveTowards(
+                crosshairTransform.position,
+                fingerPosition,
+                CrosshairSpeed
+            );
+            StateBus.CrosshairPosition = crosshairTransform.position;
+        }
     }
 
     private void UpdateCrosshairColor()

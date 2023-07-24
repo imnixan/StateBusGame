@@ -1,4 +1,6 @@
-﻿public class MenuStateWorker : IStateWorker
+﻿using UnityEngine;
+
+public class MenuStateWorker : IStateWorker
 {
     public void MakeStaff(AbstractManager callback)
     {

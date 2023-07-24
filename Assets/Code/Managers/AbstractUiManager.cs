@@ -3,11 +3,11 @@ using UnityEngine;
 
 public abstract class AbstractUiManager : AbstractManager
 {
-    protected UIButton[] buttons;
+    protected Hideable[] buttons;
 
     protected void Start()
     {
-        buttons = GetComponentsInChildren<UIButton>();
+        buttons = GetComponentsInChildren<Hideable>();
     }
 
     protected void HideButtons()

@@ -3,10 +3,18 @@ using UnityEngine.UI;
 
 public class SettingsButton : UIButton
 {
-    private Sprite onSprite,
-        offSprite;
+    [SerializeField]
+    private Color green,
+        greenStroke,
+        red,
+        redStroke;
+
+    [SerializeField]
+    private StateMachine.SettingsButtonType buttonType;
+
     private string PlayerPrefsString;
-    private Image buttonImage;
+    private Image buttonImage,
+        buttonFace;
     private string currentStatus;
 
     protected override void Start()
@@ -19,47 +27,39 @@ public class SettingsButton : UIButton
     private void InitSettingsButton()
     {
         buttonImage = GetComponent<Image>();
+        buttonFace = transform.GetChild(0).GetComponent<Image>();
         InitialPrefString();
         currentStatus = PlayerPrefs.GetString(
             PlayerPrefsString,
             StaticConstants.TurnedOnSettingsValue
         );
-        InitialSprites();
-        SetSprite();
+        SetColors();
     }
 
     private void InitialPrefString()
     {
         switch (buttonType)
         {
-            case StateMachine.ButtonType.SoundButton:
+            case StateMachine.SettingsButtonType.SoundButton:
                 PlayerPrefsString = StaticConstants.SoundSettingsPrefs;
                 break;
-            case StateMachine.ButtonType.VibroButton:
+            case StateMachine.SettingsButtonType.VibroButton:
                 PlayerPrefsString = StaticConstants.VibroSettingsPrefs;
                 break;
         }
     }
 
-    private void InitialSprites()
-    {
-        onSprite = Resources.Load<Sprite>(
-            $"SettingsButtons/{PlayerPrefsString}{StaticConstants.TurnedOnSettingsValue}"
-        );
-        offSprite = Resources.Load<Sprite>(
-            $"SettingsButtons/{PlayerPrefsString}{StaticConstants.TurnedOffSettingsVaule}"
-        );
-    }
-
-    private void SetSprite()
+    private void SetColors()
     {
         if (currentStatus == StaticConstants.TurnedOnSettingsValue)
         {
-            buttonImage.sprite = onSprite;
+            buttonImage.color = greenStroke;
+            buttonFace.color = green;
         }
         else
         {
-            buttonImage.sprite = offSprite;
+            buttonImage.color = redStroke;
+            buttonFace.color = red;
         }
     }
 
@@ -70,7 +70,7 @@ public class SettingsButton : UIButton
             : StaticConstants.TurnedOnSettingsValue;
         PlayerPrefs.SetString(PlayerPrefsString, currentStatus);
         PlayerPrefs.Save();
-        SetSprite();
+        SetColors();
     }
 
     private bool TurnedOn()

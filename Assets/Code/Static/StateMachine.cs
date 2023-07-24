@@ -2,16 +2,27 @@
 {
     public enum GameStates
     {
+        Null,
         Menu,
         Game,
         GameEnd
     }
 
-    public enum ButtonType
+    public enum MenuButtonType
+    {
+        StartButton,
+        ExitButton
+    }
+
+    public enum SettingsButtonType
     {
         VibroButton,
-        SoundButton,
-        StartButton,
-        ExitButton,
+        SoundButton
+    }
+
+    public enum GameButtonType
+    {
+        ReturnToMenu,
+        RestartGame
     }
 }

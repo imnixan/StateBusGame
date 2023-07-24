@@ -18,11 +18,12 @@ public static class StateBus
         { StateMachine.GameStates.GameEnd, new GameEndStateWorker() },
     };
 
+    public static StateQueue<int> CurrentScoresChanged;
     public static Vector2 CrosshairPosition;
     public static bool CanShoot;
     public static StateQueue<StateMachine.GameStates> GameStateChanged;
     public static StateQueue<bool> PlayerShot;
-    public static StateQueue<Vector2> Explosion;
+    public static StateQueue<Vector3> Explosion;
     public static StateQueue<bool> EnemyKilled;
 
     #endregion
@@ -68,8 +69,8 @@ public static class StateBus
     {
         var updater = new GameObject() { name = "StateBusUpdater" };
         updater.AddComponent<Updater>();
+        StateBus.GameStateChanged += StateMachine.GameStates.Menu;
         GameObject.DontDestroyOnLoad(updater);
-        GameStateChanged += StateMachine.GameStates.Menu;
     }
 
     static void Awake()

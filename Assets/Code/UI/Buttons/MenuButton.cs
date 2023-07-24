@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class MenuButton : UIButton
 {
+    [SerializeField]
+    private StateMachine.MenuButtonType buttonType;
+
     protected override void DoButtonStaff()
     {
         switch (buttonType)
         {
-            case StateMachine.ButtonType.ExitButton:
+            case StateMachine.MenuButtonType.ExitButton:
                 ExitGame();
                 break;
-            case StateMachine.ButtonType.StartButton:
+            case StateMachine.MenuButtonType.StartButton:
                 StartGame();
                 break;
         }
@@ -18,6 +21,7 @@ public class MenuButton : UIButton
 
     private void ExitGame()
     {
+        Debug.Log("Close App");
         Application.Quit();
     }
 
