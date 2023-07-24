@@ -12,19 +12,33 @@ public class EnemySpawner : AbstractManager
     private Transform spawnerTransform;
     private Vector2 minBorders,
         maxBorders;
+    private Camera camera;
 
     private void Start()
     {
-        Camera camera = Camera.main;
-        minBorders = camera.ViewportToWorldPoint(Vector2.zero);
-        maxBorders = camera.ViewportToWorldPoint(new Vector2(1, 1));
+        camera = Camera.main;
+
         spawnerTransform = transform;
         waitForSeconds = new WaitForSeconds(0.5f);
     }
 
     public override void OnGameStarted()
     {
+        SetBorders();
+
         StartCoroutine(SpawnEnemy());
+    }
+
+    private void SetBorders()
+    {
+        minBorders = camera.ViewportToWorldPoint(Vector2.zero);
+        maxBorders = camera.ViewportToWorldPoint(new Vector2(1, 1));
+        if (minBorders.x > maxBorders.x)
+        {
+            Vector2 timed = minBorders;
+            minBorders = maxBorders;
+            maxBorders = timed;
+        }
     }
 
     public override void OnMenu()

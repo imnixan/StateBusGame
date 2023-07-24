@@ -7,7 +7,7 @@ public class TimeManager : AbstractManager
     [SerializeReference]
     private AudioManager audioManager;
 
-    private const int MaxTime = 20;
+    private const int MaxTime = 60;
     private TextMeshProUGUI timeCounter;
     private WaitForSecondsRealtime waitForSeconds;
 
